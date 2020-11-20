@@ -11,6 +11,7 @@ export class IndicatorsCtrl {
     var defPointRadius = 5;
     var defZindex = 0;
     var defYaxis = 1;
+    var defStepped = false;
 
     $scope.getOverride = function() {
       if (!$scope.ctrl.panel.seriesOverrides) {
@@ -39,7 +40,7 @@ export class IndicatorsCtrl {
       }
       var bars = $scope.override.bars;
       if (_.isUndefined(lines)) {
-        bras = defMode === 'bars';
+        bars = defMode === 'bars';
       }
       var points = $scope.override.points;
       if (_.isUndefined(lines)) {
@@ -100,6 +101,19 @@ export class IndicatorsCtrl {
         propertyName: 'yaxis',
         value: value === 2 ? 'other' : 'price',
       });
+
+      // new part
+      value = $scope.override.steppedLine;
+      if (_.isUndefined(value)) {
+        value = defStepped;
+      }
+
+      $scope.currentOverrides.push({
+        name: 'Stepped',
+        propertyName: 'steppedLine',
+        value: value,
+      });
+
      };
 
     $scope.updateOverride = function() {
@@ -112,6 +126,7 @@ export class IndicatorsCtrl {
       $scope.override.pointradius = $scope.currentOverrides[4].value;
       $scope.override.zindex = $scope.currentOverrides[5].value;
       $scope.override.yaxis = $scope.currentOverrides[6].value === 'other' ? 2 : 1;
+      $scope.override.steppedLine = $scope.currentOverrides[7].value;
       $scope.ctrl.render();
     };
 
@@ -129,6 +144,7 @@ export class IndicatorsCtrl {
         'pointradius': defPointRadius,
         'zindex': defZindex,
         'yaxis': defYaxis,
+        'steppedLine': defStepped,
       };
       if (!$scope.ctrl.panel.seriesOverrides) {
         $scope.ctrl.panel.seriesOverrides = [];

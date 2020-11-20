@@ -170,6 +170,8 @@ export default function link(scope, elem, attrs, ctrl) {
       show: true,
       position: panel.swapYaxes ? 'right' : 'left',
       axisLabel: panel.labelY1,
+      min: panel.minY1,
+      max: panel.maxY1,
     }];
     if (secondYaxis) {
       yaxes.push({
@@ -178,6 +180,8 @@ export default function link(scope, elem, attrs, ctrl) {
         show: true,
         position: panel.swapYaxes ? 'left' : 'right',
         axisLabel: panel.labelY2,
+        min: panel.minY2,
+        max: panel.maxY2,
       });
     }
 
